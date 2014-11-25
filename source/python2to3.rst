@@ -1,27 +1,32 @@
-Differences between Python 2 and 3
+Porting code to Python 2 and 3
 ######################################
 
 :sources: http://python3porting.com/differences.html
 
-The following contains only part of the link above. I extracted
-only part of relevance for what was required to migrate my packages. 
-Besides, text have been simplified. for full details, please see original 
+The following contains only parts of the link above. The original 
+link is really complete. This part contains only a subset of the
+original version (relevant for the migration required on my packages). 
+Besides, text has been simplified so for full details, please see the original 
 link above.
 
 
 Main differences
 =================
 
-apply()
---------
+Deprecated/Removed
+--------------------
 
-The Python 2 builtin apply() is deprecated since Python 3.3 and has been removed in Python 3. 
+* apply()
+* cmp() see later
+
+
+
 
 buffer()
 -----------
 
 The Python 2 buffer() builtin is replaced by the memoryview class in Python 3. 
-This code will run in both Python 2 and Python 3::
+When function are replaced, the following template would do the trick::
 
     >>> import sys
     >>> if sys.version > '3':
@@ -64,7 +69,6 @@ All classes now subclass from object, even if they don’t do so explicitly. In 
         pass
 
 
-
 Comparisons
 --------------
 
@@ -104,8 +108,6 @@ If you need to support both Python 2 and Python 3 without 2to3 conversion and yo
 
 Also, the has_key() method on dictionaries is gone. Use the in operator instead.
 
-See also Make sure you aren’t using any removed modules
-
 except
 ---------
 
@@ -116,10 +118,6 @@ In Python 2 the syntax to catch exceptions have changed from::
 to the clearer Python 3 syntax::
 
     except (Exception1, Exception2) as target:
-
-Other differences is that the target no longer can be a tuple and that string exceptions are gone. 
-
-Both syntaxes work in Python 2.6 and Python 2.7.
 
 
 Exception objects
@@ -183,7 +181,7 @@ needs to be changed to ::
     
 These are called **relative imports**, and there is also a syntax to import from one level up module above: from .. import csv.
 
-If you to support both Python 2 and Python 3, the from . and from .. syntax is available since Python 2.5, with a from __future__ import absolute_import statement that changes the behavior to the Python 3 behavior.
+If you wish to support both Python 2 and Python 3, the from . and from .. syntax is available since Python 2.5, with a from __future__ import absolute_import statement that changes the behavior to the Python 3 behavior.
 
 
 input() and raw_input()
@@ -240,11 +238,6 @@ However, the representation is still different, so doctests will fail. If you ne
     >>> isinstance(1, integer_types)
     True
 
-
-Metaclasses
-------------------
-
-In Python 2 you specified the metaclass with the __metaclass__ attribute. In Python 3 you instead pass in a metaclass parameter in the class definition. Supporting metaclasses in Python 2 and Python 3 without using 2to3 requires you to create classes on the fly. If you want this, I highly recommend to use the six module, which has a very clever with_metaclass() function.
 
 
 .next()
@@ -348,24 +341,6 @@ Slice operator methods
 
 In Python 1 you used __getslice__ and __setslice__ to support slice methods like foo[3:7] on your object. These were deprecated in Python 2.0 but still supported. Python 3 removes the support for the slice methods, so you need to instead extend __getitem__, __setitem__ and __delitem__ with slice object support.
 
->>> class StrawberryTart(object):
-...
-...    def __getitem__(self, n):
-...        """An example of how to use slice objects"""
-...        if isinstance(n, slice):
-...            # Expand the slice object using range()
-...            # to a maximum of eight items.
-...            return [self[x] for x in 
-...                    range(*n.indices(8))]
-...
-...        # Return one item of the tart
-...        return 'A slice of StrawberryTart with ' \
-...               'not so much rat in it.'
-...
->>> tart = StrawberryTart()
->>> tart[5:6]
-['A slice of StrawberryTart with not so much rat in it.']
-
 Sorting
 --------
 
@@ -396,8 +371,8 @@ Bytes, strings and unicode
 
 - strings are always unicode in Python 3
 - since strings are now always Unicode, we need another type for binary data. Python 3 has two binary types:
-  - bytes : similar to string type but is a strint of integers instead of characters
-  - bytearrays: like a list but that hold integers between 0 and 255. Is mutable and used to manipulate binary data.
+    - bytes : similar to string type but is a strint of integers instead of characters
+    - bytearrays: like a list but that hold integers between 0 and 255. Is mutable and used to manipulate binary data.
 
 Bytes literals
 ----------------
@@ -490,4 +465,4 @@ urlparse.urlparse                       urllib.parse
 urlparse.urlsplit                       urllib.parse
 urlparse.urlunparse                     urllib.parse
 urlparse.urlunsplit                     urllib.parse
-======================================  =========================
+==================================  =========================
