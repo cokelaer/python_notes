@@ -438,16 +438,7 @@ urllib2.build_opener                    urllib.request
 urllib2.CacheFTPHandler                 urllib.request
 urllib2.FileHandler                     urllib.request
 urllib2.FTPHandler                      urllib.request
-urllib2.HTTPBasicAuthHandler            urllib.request
-urllib2.HTTPCookieProcessor             urllib.request
-urllib2.HTTPDefaultErrorHandler         urllib.request
-urllib2.HTTPDigestAuthHandler           urllib.request
-urllib2.HTTPError                       urllib.request
-urllib2.HTTPHandler                     urllib.request
-urllib2.HTTPPasswordMgr                 urllib.request
-urllib2.HTTPPasswordMgrWithDefaultRealm urllib.request
-urllib2.HTTPRedirectHandler             urllib.request
-urllib2.HTTPSHandler                    urllib.request
+urllib2.HTTP*                           urllib.request
 urllib2.install_opener                  urllib.request
 urllib2.OpenerDirector                  urllib.request
 urllib2.ProxyBasicAuthHandler           urllib.request
