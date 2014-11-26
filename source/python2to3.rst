@@ -1,7 +1,9 @@
 Porting code to Python 2 and 3
 ######################################
 
-:sources: http://python3porting.com/differences.html
+:sources: 
+    - http://python3porting.com/differences.html
+    - http://www.diveintopython3.net/porting-code-to-python-3-with-2to3.html
 
 The following contains only parts of the link above. The original 
 link is really complete. This part contains only a subset of the
@@ -273,6 +275,16 @@ print
 
 Just use print() all the time
 
+=========================   =====================
+Python 2                    Python3
+=========================   =====================
+print                       print()
+print 1                     print(1)
+print 1, 2,                 print(1, 2, end=' ')
+print >>sys.stderr, 1, 2    print(1, 2, file=sys.stderr) 
+=========================   =====================
+
+
 raise
 -------
 
@@ -399,11 +411,41 @@ stat            Supplanted by os.stat()
 thread          Supplanted by threading
 ============== ==========================
 
+itertools
+============
+
+In Python 2, the itertools module defines variants of the global zip(), map(), and filter() functions that returned iterators instead of lists. In Python 3, those global functions return iterators, so those functions in the itertools module have been removed.
+
+========================== =================
+Python 2                    Python 3
+========================== =================
+itertools.izip(a, b)        zip(a, b)
+itertools.imap(a, b)        map(a, b)
+itertools.ifilter(a, b)     filter(a, b)
+========================== =================
+
 
 urllib, urlparse, urllib2
 ============================
 
 The three modules urllib, urllib2 and urlparse has been reorganized into three new modules, urllib.request, urllib.parse and urllib.error. 
+
+In brief:
+
+======================================  ===================================================
+Python2                                 Python3
+======================================  ===================================================
+import urllib                           import urllib.request, urllib.parse, urllib.error
+import urllib2                          import urllib.request, urllib.error
+import urlparse                         import urllib.parse
+import robotparser                      import urllib.robotparser
+from urllib import FancyURLopener       from urllib.request import FancyURLopener
+from urllib import urlencode            from urllib.parse import urlencode
+from urllib2 import Request             from urllib.request import Request
+from urllib2 import HTTPError           from urllib.error import HTTPError
+======================================  ===================================================
+
+More details:
 
 ==================================  =========================
 Python 2 name                       Moved to
