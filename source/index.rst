@@ -5,11 +5,11 @@ About
 
 The main goal of this documentation is to make available notes I'm taking about the Python language. It does not pretend to be a thourough tutorial on Python. Very good tutorials and books already exist indeed (see for instance the `official Python website <http://docs.python.org/>`_ or `dive into python <http://diveintopython.org/>`_  and take a look at the bibliography section :ref:`biblio`). 
 
-These notes may be useful for beginners or more experienced Python developers, which is the main reason for making it public. Some sections are ready for reading (:ref:`main_beginners`, :ref:`main_advanced`) and some others maybe in development (:ref:`main_modules`).
+These notes may be useful for beginners or more experienced Python developers, which is the main reason for making it public. Some sections are ready for reading (:ref:`main_beginners`, :ref:`main_advanced`) and some others maybe in development (:ref:`main_modules`). 
 
 Before starting, if you want to know why to use Python, just have a quick look in the :ref:`advantage_vs_drawback` section. 
 
-.. note:: you can link this page to the following tiny URL: http://tinyurl.com/d2k7bqe
+.. note:: Those pages are gathered as a Sphinx project and hosted here as a tiny URL: http://tinyurl.com/d2k7bqe
 
 ==========================
 Before starting
@@ -53,6 +53,8 @@ Although Python is an Object Oriented language (everything is an object in Pytho
     builtins.rst
     pythonpath.rst
     coding_conventions.rst
+
+
 
 .. _main_advanced:
 
@@ -146,3 +148,4 @@ Changelog
     module_anydbm
     module_readline
     misc
+    glossary
